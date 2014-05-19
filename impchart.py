@@ -32,7 +32,7 @@ for state in v.split(";"):
         print("Invalid format (skipping): %s" % state)
         continue
 
-    current_state = m.group(1)
+    current_state = m.group(1).upper()
     pairs = m.group(2).split(",")
     if npairs == 0:
         npairs = len(pairs)
@@ -45,7 +45,7 @@ for state in v.split(";"):
               (npairs, len(pairs), state))
         
     for pair in pairs:
-        sp = tuple(x for x in pair.split("/") if x)
+        sp = tuple(x.upper() for x in pair.split("/") if x)
         if len(sp) != 2:
             raise Exception("Invalid pair %s from: %s" % (pair, state))
         
