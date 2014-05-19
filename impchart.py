@@ -119,13 +119,18 @@ while changed:
                         "Pair %s but not in implication table!" % (swapped,))
                 
 print("\nThe final implication table:")
+implied={}
 for j in range(1, len(tbl)):
     print(tbl[j][0], end="| ")
     for i in range(0, j):
         entry = implication[(tbl[i][0], tbl[j][0])]
         if entry[0]:
             print("X", end=(":" if entry[1] else " "))
-            
+        else:
+            if tbl[i][0] not in implied:
+                implied[tbl[i][0]] = set(tbl[j][0])
+            else:
+                implied[tbl[i][0]].add(tbl[j][0])
         if entry[1]:
             print("(", end="")
             a = ",".join("%s-%s" % (ipair[0], ipair[1]) for ipair in entry[1])
@@ -137,7 +142,21 @@ print("-"*60)
 print("    " , end="")
 for i in tbl:
     print(i[0], end=" ")
-print()
+print("\n")
+
+print("Equivalent states:")
+for minimal in sorted(implied):
+    print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
+print("\nMinimal equivalent states")
+
+for k in set(implied.keys()):
+    if k in implied:
+        for j in set(implied.keys()):
+            if j != k and j in implied:
+                if all(q in implied[k] for q in implied[j]):
+                    del implied[j]
+for minimal in sorted(implied):
+    print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
 
             
 
