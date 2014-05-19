@@ -140,8 +140,8 @@ for j in range(1, len(tbl)):
 
 print("-"*60)
 print("    " , end="")
-for i in tbl:
-    print(i[0], end=" ")
+for i in range(len(tbl) - 1):
+    print(tbl[i][0], end=" ")
 print("\n")
 
 print("Equivalent states:")
