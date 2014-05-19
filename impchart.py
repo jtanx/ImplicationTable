@@ -128,7 +128,7 @@ for j in range(1, len(tbl)):
             print("X", end=(":" if entry[1] else " "))
         else:
             if tbl[i][0] not in implied:
-                implied[tbl[i][0]] = set(tbl[j][0])
+                implied[tbl[i][0]] = set((tbl[j][0],))
             else:
                 implied[tbl[i][0]].add(tbl[j][0])
         if entry[1]:
@@ -155,6 +155,7 @@ for k in set(implied.keys()):
             if j != k and j in implied:
                 if all(q in implied[k] for q in implied[j]):
                     del implied[j]
+
 for minimal in sorted(implied):
     print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
 
