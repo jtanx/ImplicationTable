@@ -23,7 +23,6 @@ npairs=0
 log2npairs=0
 v = re.sub("\s","", input("Enter the transition table string:"))
 for state in v.split(";"):
-    state = re.sub("\s", "", state) #Remove ALL whitespace
     if not state:
         continue
 
@@ -159,20 +158,6 @@ for k in set(implied.keys()):
 for minimal in sorted(implied):
     print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-            
+ 
+input("Press enter to exit.")
     
