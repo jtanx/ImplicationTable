@@ -5,8 +5,8 @@ import sys,os,re, math
 transition = {}
 # Cell: {crossed-out, [(pairs)]}
 
-print("Implication chart calculator v0.1")
-print("MIT licensed.")
+print("Implication chart calculator v0.2")
+print()
 print("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.")
 print()
 print("Usage: A transition table string is of the form:")
@@ -146,8 +146,8 @@ print("\n")
 print("Equivalent states:")
 for minimal in sorted(implied):
     print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
-print("\nMinimal equivalent states")
 
+print("\nMinimal equivalent states")
 for k in set(implied.keys()):
     if k in implied:
         for j in set(implied.keys()):
@@ -155,9 +155,20 @@ for k in set(implied.keys()):
                 if all(q in implied[k] for q in implied[j]):
                     del implied[j]
 
+redundant = set()
 for minimal in sorted(implied):
+    redundant.update(implied[minimal])
     print("%s (equivalent to %s)" % (minimal, ",".join(implied[minimal])))
 
- 
-input("Press enter to exit.")
+print("\nMinimised complete set of states required:")
+for entry in tbl:
+    if entry[0] in implied:
+        print("(%s" % entry[0], end="")
+        for k in sorted(implied[entry[0]]):
+            print(k, end="")
+        print(")", end=" ")
+    elif entry[0] not in redundant:
+        print(entry[0], end=" ")
+        
+input("\nPress enter to exit.")
     
