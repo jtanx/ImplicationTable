@@ -1,4 +1,4 @@
-import sys,os,re, math
+import sys,os,re, math,atexit
 
 #[state, S0, Z0, S1, Z1]
 # S0:S0/S0,S1/Z1
@@ -18,6 +18,11 @@ print()
 print("\tList all such 'rows' by delimiting them with semicolons, e.g:")
 print("\tA:B/0,C/1;B:C/1,D/0;...")
 print()
+
+def hold():
+    input("Press enter to exit.")
+
+atexit.register(hold)
 
 npairs=0
 log2npairs=0
@@ -169,6 +174,4 @@ for entry in tbl:
         print(")", end=" ")
     elif entry[0] not in redundant:
         print(entry[0], end=" ")
-        
-input("\nPress enter to exit.")
     
