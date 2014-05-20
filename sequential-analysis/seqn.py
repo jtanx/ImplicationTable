@@ -126,7 +126,7 @@ def insert_excitation(row, ff_inputs, use_jk=True):
                 ffnames = ("J%d" % ffn, "K%d" % ffn)
             else:
                 val = (d_excite(cstate[i], nstate[i]),)
-                ffnames = ("D%d % ffn",)
+                ffnames = ("D%d" % ffn,)
 
             for v in range(len(val)):
                 if ffnames[v] not in ff_inputs:
@@ -199,6 +199,7 @@ for ff in sorted(ff_inputs):
     if ff == "__Z":
         ff = "Z (output)"
     print("%s:" % ff, end=" ")
+    #print(snames, qm.simplify(high, dc))
     print(" + ".join(fmt_str(snames, x) for x in qm.simplify(high, dc)))
 
     
