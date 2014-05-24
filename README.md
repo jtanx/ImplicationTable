@@ -56,3 +56,5 @@ E (equivalent to F)
 Minimised complete set of states required:
 (ABH) (CD) (EF) G
 ~~~~~
+
+There should not *theoretically* be any limit to the size of input -- it should be able to handle n flip flops, but will subsequently require 2^n transitions/outputs to be specified for each state.
